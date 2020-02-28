@@ -25,9 +25,11 @@ function populateStorage() {
 }
 
 function render() {
-    myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
-    if(!myLibrary){
-        return;
+    myLibrary = localStorage.getItem("myLibrary");
+    if(myLibrary === null) {
+        myLibrary = [];
+    } else {
+        myLibrary = JSON.parse(myLibrary);
     }
     const library = document.querySelector("div.library");
     for(let i = 0; i < myLibrary.length; i++) {
