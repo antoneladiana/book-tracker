@@ -31,25 +31,38 @@ function render() {
     } else {
         myLibrary = JSON.parse(myLibrary);
     }
-    const library = document.querySelector("div.library");
+    const library = document.querySelector(".library");
     for(let i = 0; i < myLibrary.length; i++) {
         
-        const bookContainer = document.createElement("div");
+        const bookContainer = document.createElement("tr");
         bookContainer.classList.add("book-container");
         bookContainer.setAttribute("data-book-number", i);
+
+        const title = document.createElement("td");
+        title.classList.add("title");
+        title.textContent = myLibrary[i].title;
+        bookContainer.appendChild(title);
+
+        const author = document.createElement("td");
+        author.classList.add("author");
+        author.textContent = myLibrary[i].author;
+        bookContainer.appendChild(author);
+
+        const pages = document.createElement("td");
+        pages.classList.add("pages");
+        pages.textContent = myLibrary[i].pages;
+        bookContainer.appendChild(pages);
+
+        const read = document.createElement("td");
+        read.classList.add("read");
+        if(myLibrary[i].read) {
+            read.textContent = "Yes";
+        } else {
+            read.textContent = "No";
+        }
+        bookContainer.appendChild(read);
         
-        const book = document.createElement("div");
-        book.classList.add("book");
-        book.textContent = myLibrary[i].title + ", " + myLibrary[i].author + ", " + myLibrary[i].pages + ", " + myLibrary[i].read;
-        book.setAttribute("data-book-number", i);
-        bookContainer.appendChild(book);
-
-        const deleteBookButton = document.createElement("button");
-        deleteBookButton.textContent = "Remove";
-        deleteBookButton.classList.add("delete-book-button");
-        deleteBookButton.setAttribute("data-book-number", i);
-        bookContainer.appendChild(deleteBookButton);
-
+        const buttonContainer2 = document.createElement("td");
         const changeStatusButton = document.createElement("button");
         if(myLibrary[i].read) {
             changeStatusButton.textContent = "Mark as Unread";
@@ -58,8 +71,17 @@ function render() {
         }
         changeStatusButton.classList.add("change-status-button");
         changeStatusButton.setAttribute("data-book-number", i);
-        bookContainer.appendChild(changeStatusButton);
-        
+        buttonContainer2.appendChild(changeStatusButton);
+        bookContainer.appendChild(buttonContainer2);
+
+        const buttonContainer1 = document.createElement("td");
+        const deleteBookButton = document.createElement("button");
+        deleteBookButton.textContent = "Remove";
+        deleteBookButton.classList.add("delete-book-button");
+        deleteBookButton.setAttribute("data-book-number", i);
+        buttonContainer1.appendChild(deleteBookButton);
+        bookContainer.appendChild(buttonContainer1);
+
         library.appendChild(bookContainer);
     }
 }
@@ -90,8 +112,8 @@ function addBook() {
 }
 
 function deleteBook() {
-    const library = document.querySelector("div.library");
-    let books = document.querySelectorAll("div.book-container");
+    const library = document.querySelector(".library");
+    let books = document.querySelectorAll(".book-container");
     books.forEach(book => {if(this.getAttribute("data-book-number") == book.getAttribute("data-book-number")){
         library.removeChild(book);
     }})
@@ -100,16 +122,20 @@ function deleteBook() {
 }
 
 function changeStatus() {
-    let books = document.querySelectorAll("div.book-container");
+    let books = document.querySelectorAll(".book-container");
     books.forEach(book => {if(this.getAttribute("data-book-number") == book.getAttribute("data-book-number")){
         i = Number(this.getAttribute("data-book-number"));
         myLibrary[i].read = !myLibrary[i].read;
         populateStorage();
-        book.children[0].textContent = myLibrary[i].title + ", " + myLibrary[i].author + ", " + myLibrary[i].pages + ", " + myLibrary[i].read;
+        book.children[0].textContent = myLibrary[i].title;
+        book.children[1].textContent = myLibrary[i].author;
+        book.children[2].textContent = myLibrary[i].pages;
         if(myLibrary[i].read) {
-            book.children[2].textContent = "Mark as Unread";
+            book.children[3].textContent = "Yes";
+            book.children[4].children[0].textContent = "Mark as Unread";
         } else {
-            book.children[2].textContent = "Mark as Read";
+            book.children[3].textContent = "No";
+            book.children[4].children[0].textContent = "Mark as Read";
         }
     }})
 }

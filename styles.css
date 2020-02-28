@@ -1,3 +1,83 @@
+/**************************************************************/
+/************************** LAYOUT ****************************/
+/**************************************************************/
+
 .add-book-form {
     display: none;
+    margin-top: 30px;
+}
+header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+.form-element {
+    margin-top: 20px;
+}
+.add-book-button, .cancel-button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+table {
+    margin-top: 50px;
+}
+/**************************************************************/
+/*********************** TYPOGRAPHY ***************************/
+/**************************************************************/
+
+body {
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 1.15em;
+    text-align: center;
+}
+h1 {
+    font-family:  'Open Sans', sans-serif;
+    font-size: 2em;
+    text-transform: uppercase;
+    text-align: left;
+}
+.new-book-button {
+    font-size: 1.2em;
+}
+label {
+    font-weight: bold;
+}
+
+/**************************************************************/
+/************************** COLOR *****************************/
+/**************************************************************/
+
+/* ------------------ COLOR PALLET --------------------- */
+/* 
+                        #000000 Black
+                        #FFFFFF White
+                        #994C4F English Red
+                        #7F3F41 Cordovan
+                        #FF0076 Winter Sky
+                        #F0F0F0 Isabelline
+                        #EAE3E3 Platinum
+                        #E50000 Ku Crimson
+*/
+
+header {
+    box-shadow: 0px 3px 7px -2px rgba(0,0,0,0.29);
+    background: #994C4F;
+}
+h1 {
+    color: #FFFFFF;
+}
+.new-book-button {
+    background: #FF0076;
+    border: 1px solid #FF0076;
+    border-radius: 5px;
+    color: #FFFFFF; 
+}
+.add-book-button, .cancel-button, .change-status-button, .delete-book-button {
+    background: #994C4F;
+    border: 1px solid #994C4F;
+    border-radius: 5px;
+    color: #FFFFFF;
+}
+table, td, th {
+    border: 1px solid black;
 }
